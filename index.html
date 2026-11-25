@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#35121e">
+    <title>Shiva &amp; Sathya | Anniversary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Short JSVisuals intro that fades out before the invitation appears -->
+    <div class="intro" id="intro">
+        <div class="intro-inner">
+            <div class="intro-logo">JS</div>
+            <p class="intro-brand">JSVISUALS</p>
+            <span class="intro-rule"></span>
+            <p class="intro-tagline">YOUR IDEAS. OUR CREATIVITY.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="header">
+        <a class="brand" href="#home" aria-label="JSVisuals">
+            <span class="brand-symbol">JS</span>
+            <span class="brand-word">JSVISUALS</span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span>
+        </button>
+        <nav class="nav" id="nav">
+            <a href="#home">Home</a>
+            <a href="#note">A little note</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#wishes">Send wishes</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Homepage photo: image is included locally in images/ folder -->
+        <section class="hero" id="home">
+            <div class="hero-blur" aria-hidden="true"></div>
+            <div class="hero-photo">
+                <img src="images/shiva-sathya.jpg" alt="Shiva and Sathya at their wedding celebration" fetchpriority="high">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="hero-eyebrow">A CELEBRATION OF LOVE &amp; TOGETHERNESS</p>
+                <p class="hero-kicker">HAPPY ANNIVERSARY</p>
+                <h1>Shiva <span>&amp;</span><br>Sathya</h1>
+                <div class="flourish"><span></span><b>✦</b><span></span></div>
+                <p class="hero-date">26 NOVEMBER 2025</p>
+                <a class="hero-button" href="#note">EXPLORE THEIR STORY <span>↓</span></a>
+            </div>
+            <p class="side-caption">A MOMENT TO CELEBRATE FOREVER</p>
+        </section>
+
+
+        <section class="note section" id="note">
+            <p class="section-number">01 / A LITTLE NOTE</p>
+            <div class="note-grid">
+                <p class="note-quote">Together is a beautiful place to be.</p>
+                <div class="note-main">
+                    <p class="overline">WITH LOVE FROM MRCE</p>
+                    <h2>Some bonds only grow <em>more beautiful</em> with time.</h2>
+                    <p class="paragraph">Happy 1st Anniversary, you both! ❤️✨
+
+One beautiful year of love, laughter, and togetherness. Wishing you both many more years of happiness, endless memories, and a lifetime of love. Lots of love and wishes from your college friends! 🥰🎉</p>
+                    <p class="signature">With love,MRCE family.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery section" id="gallery">
+            <div class="gallery-heading">
+                <div>
+                    <p class="section-number">02 / THE MEMORIES</p>
+                    <p class="overline">LITTLE MOMENTS, FOREVER MEMORIES</p>
+                    <h2>A gallery of <em>togetherness.</em></h2>
+                </div>
+                <p class="gallery-caption">Four frames. Countless memories.</p>
+            </div>
+            <!-- Replace the image source URLs with your own photos -->
+            <div class="gallery-grid">
+                <figure class="gallery-card"><img src="images/1.jpeg" alt="Wedding memory 1"><figcaption><span>01</span> The beginning</figcaption></figure>
+                <figure class="gallery-card"><img src="images/4.jpeg" alt="Wedding memory 2"><figcaption><span>02</span> A beautiful day</figcaption></figure>
+                <figure class="gallery-card"><img src="images/3.jpeg" alt="Wedding memory 3"><figcaption><span>03</span> Side by side</figcaption></figure>
+                <figure class="gallery-card"><img src="images/2.jpeg" alt="Wedding memory 4"><figcaption><span>04</span> Forever starts here</figcaption></figure>
+            </div>
+        </section>
+
+        <section class="wishes section" id="wishes">
+            <div class="orbit" aria-hidden="true"></div>
+            <div class="wishes-grid">
+                <div class="wishes-copy">
+                    <p class="section-number light">03 / SEND YOUR LOVE</p>
+                    <p class="overline light">A MESSAGE FROM THE HEART</p>
+                    <h2>Your wishes make<br>this day <em>more special.</em></h2>
+                    <p class="paragraph light-copy">Leave a note for Shiva and Sathya. Your message opens in WhatsApp so you can send it directly.</p>
+                    <p class="wishes-script">With love <span>✦</span></p>
+                </div>
+                <form class="wish-form" id="wishForm">
+                    <div class="form-heading"><span>YOUR PERSONAL NOTE</span><span class="form-star">✦</span></div>
+                    <label for="visitorName">Your name</label>
+                    <input id="visitorName" name="visitorName" type="text" placeholder="Enter your full name" required>
+                    <label for="rollNumber">MRCE roll number</label>
+                    <input id="rollNumber" name="rollNumber" type="text" maxlength="11" placeholder="Example: 21Q91A66XX" required>
+                    <p class="roll-hint">Enter your MRCE roll number in the accepted format.</p>
+                    <label for="wishMessage">Your anniversary wish</label>
+                    <textarea id="wishMessage" name="wishMessage" rows="2" maxlength="500" required>Wishing you both endless love, happiness and togetherness. Happy Anniversary, Shiva & Sathya! ❤️</textarea>
+                    <div class="count"><span id="charCount">0</span> / 500</div>
+                    <p class="form-error" id="formError" aria-live="polite"></p>
+                    <button class="send-button" type="submit">SEND YOUR WISH <span>↗</span></button>
+                    <p class="form-footnote">Your message is not stored on this website.</p>
+                </form>
+            </div>
+        </section>
+
+        <section class="closing">
+            <p class="overline">HERE'S TO MANY MORE CHAPTERS</p>
+            <h2>May your love story<br>keep <em>unfolding.</em></h2>
+            <div class="closing-star">✦</div>
+            <p class="closing-names">Shiva &amp; Sathya</p>
+        </section>
+    </main>
+
+
+    <!-- JSVisuals footer brand -->
+    <footer class="footer">
+        <a class="footer-brand" href="#home"><span class="footer-symbol">JS</span><span class="footer-word">JSVISUALS</span></a>
+        <p class="footer-tagline">YOUR IDEAS. OUR CREATIVITY.</p>
+        <p class="footer-credit">A celebration crafted with care by <strong>JSVisuals</strong></p>
+        <a class="footer-top" href="#home">BACK TO TOP ↑</a>
+    </footer>
+    <!-- Background music player -->
+<audio
+    id="backgroundMusic"
+    src="Court-Marriage-Bgm.mp3"
+    loop
+    preload="none">
+</audio>
+
+<!-- Floating music button -->
+    <button
+        class="music-toggle"
+        id="musicToggle"
+        type="button"
+        aria-label="Play background music"
+        aria-pressed="false">
+
+        <span class="music-icon" aria-hidden="true">♫</span>
+
+        <span class="music-label"></span>
+
+    </button>
+    <script src="script.js"></script>
+</body>
+</html>
