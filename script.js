@@ -38,18 +38,18 @@ updateCount();
 wishMessage.addEventListener("input", updateCount);
 
 /* Validate allowed MRCE roll number patterns */
-function isValidRollNumber(value) {
-    const patterns = [
-        /^21Q91A66[A-Z0-9]{2}$/i,
-        /^21Q91A66A[A-Z0-9]$/i,
-        /^21Q91A66B[A-Z0-9]$/i,
-        /^21Q91A66C[A-Z0-9]$/i
-    ];
+// function isValidRollNumber(value) {
+//     const patterns = [
+//         /^21Q91A66[A-Z0-9]{2}$/i,
+//         /^21Q91A66A[A-Z0-9]$/i,
+//         /^21Q91A66B[A-Z0-9]$/i,
+//         /^21Q91A66C[A-Z0-9]$/i
+//     ];
 
-    return patterns.some(function (pattern) {
-        return pattern.test(value);
-    });
-}
+//     return patterns.some(function (pattern) {
+//         return pattern.test(value);
+//     });
+// }
 
 /* Prepare and open the WhatsApp message */
 const wishForm = document.getElementById("wishForm");
@@ -68,10 +68,10 @@ wishForm.addEventListener("submit", function (event) {
         return;
     }
 
-    if (!isValidRollNumber(roll)) {
-        formError.textContent = "Please enter a valid MRCE roll number.";
-        return;
-    }
+    // if (!isValidRollNumber(roll)) {
+    //     formError.textContent = "Please enter a valid MRCE roll number.";
+    //     return;
+    // }
 
     /* Update this phone number if needed. Include country code, no plus sign. */
     const whatsappNumber = "919705068085";
@@ -138,7 +138,7 @@ function showMusicState() {
     // If music is muted
     if (backgroundMusic.muted) {
 
-        musicLabel.textContent = "UNMUTE MUSIC";
+        musicLabel.textContent = "UNMUTE";
         musicIcon.textContent = "♪";
 
         musicToggle.classList.remove("is-playing");
@@ -228,3 +228,198 @@ backgroundMusic.addEventListener("ended", function () {
     showMusicState();
 
 });
+
+/* =========================================
+   PREMIUM SPARKLE ANIMATION
+   ========================================= */
+
+// Get the sparkle canvas
+const sparkleCanvas = document.getElementById("sparkleCanvas");
+
+// Get the drawing area
+const sparkleContext = sparkleCanvas.getContext("2d");
+
+// Store all sparkle particles
+let sparkleParticles = [];
+
+// Check whether reduced motion is preferred
+const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
+
+
+// Create one sparkle particle
+function createSparkle() {
+
+    return {
+        x: Math.random() * window.innerWidth,
+
+        y: Math.random() * window.innerHeight,
+
+        size: Math.random() * 1.8 + 0.5,
+
+        opacity: Math.random() * 0.6 + 0.15,
+
+        speed: Math.random() * 0.25 + 0.08,
+
+        phase: Math.random() * Math.PI * 2,
+
+        twinkleSpeed: Math.random() * 0.025 + 0.008
+    };
+
+}
+
+
+// Set canvas dimensions
+function resizeSparkleCanvas() {
+
+    const pixelRatio = Math.min(
+        window.devicePixelRatio || 1,
+        1.5
+    );
+
+    sparkleCanvas.width =
+        window.innerWidth * pixelRatio;
+
+    sparkleCanvas.height =
+        window.innerHeight * pixelRatio;
+
+    sparkleCanvas.style.width =
+        window.innerWidth + "px";
+
+    sparkleCanvas.style.height =
+        window.innerHeight + "px";
+
+    sparkleContext.setTransform(
+        pixelRatio,
+        0,
+        0,
+        pixelRatio,
+        0,
+        0
+    );
+
+
+    // Reduce particle count on mobile
+    const particleCount =
+        window.innerWidth < 700 ? 48 : 100;
+
+
+    // Create the particles
+    sparkleParticles = [];
+
+    for (let i = 0; i < particleCount; i++) {
+
+        sparkleParticles.push(
+            createSparkle()
+        );
+
+    }
+
+}
+
+
+// Draw one sparkle
+function drawSparkle(particle) {
+
+    // Twinkle gently
+    particle.phase += particle.twinkleSpeed;
+
+    const twinkle =
+        (Math.sin(particle.phase) + 1) / 2;
+
+    const currentOpacity =
+        particle.opacity * twinkle;
+
+
+    // Draw the glowing dot
+    sparkleContext.beginPath();
+
+    sparkleContext.arc(
+        particle.x,
+        particle.y,
+        particle.size,
+        0,
+        Math.PI * 2
+    );
+
+    sparkleContext.fillStyle =
+        `rgba(238, 211, 160, ${currentOpacity})`;
+
+    sparkleContext.shadowBlur = 8;
+
+    sparkleContext.shadowColor =
+        "rgba(238, 211, 160, 0.45)";
+
+    sparkleContext.fill();
+
+
+    // Reset shadow after drawing
+    sparkleContext.shadowBlur = 0;
+
+
+    // Slowly drift upward
+    particle.y -= particle.speed;
+
+
+    // Slight horizontal movement
+    particle.x +=
+        Math.sin(particle.phase) * 0.15;
+
+
+    // Reappear from bottom when reaching top
+    if (particle.y < -10) {
+
+        particle.y =
+            window.innerHeight + 10;
+
+        particle.x =
+            Math.random() * window.innerWidth;
+
+    }
+
+}
+
+
+// Animate the sparkle effect
+function animateSparkles() {
+
+    sparkleContext.clearRect(
+        0,
+        0,
+        window.innerWidth,
+        window.innerHeight
+    );
+
+
+    // Draw each particle
+    sparkleParticles.forEach(function (particle) {
+
+        drawSparkle(particle);
+
+    });
+
+
+    // Continue animation
+    requestAnimationFrame(
+        animateSparkles
+    );
+
+}
+
+
+// Start sparkle effect
+if (!reduceMotion) {
+
+    resizeSparkleCanvas();
+
+    animateSparkles();
+
+
+    // Re-adjust when screen size changes
+    window.addEventListener(
+        "resize",
+        resizeSparkleCanvas
+    );
+
+}
